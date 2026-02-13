@@ -1,12 +1,12 @@
 #!/bin/bash
 # Claude Forge — One-liner Installation Script
-# Usage: curl -fsSL https://raw.githubusercontent.com/ewan/claude-forge/main/install.sh | bash
+# Usage: curl -fsSL https://raw.githubusercontent.com/ewangerardin/claude-forge/main/install.sh | bash
 
 set -e
 
 FORGE_VERSION="1.0.0"
-FORGE_REPO="https://github.com/ewan/claude-forge"
-FORGE_ARCHIVE="https://github.com/ewan/claude-forge/archive/refs/heads/main.tar.gz"
+FORGE_REPO="https://github.com/ewangerardin/claude-forge"
+FORGE_ARCHIVE="https://github.com/ewangerardin/claude-forge/archive/refs/heads/main.tar.gz"
 
 # Colors
 RED='\033[0;31m'

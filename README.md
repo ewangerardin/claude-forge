@@ -16,12 +16,12 @@ Drop `.claude/` dans n'importe quel projet pour transformer Claude Code en syst√
 
 ### One-liner
 ```bash
-curl -fsSL https://raw.githubusercontent.com/ewan/claude-forge/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/ewangerardin/claude-forge/main/install.sh | bash
 ```
 
 ### Manuel
 ```bash
-git clone https://github.com/ewan/claude-forge.git
+git clone https://github.com/ewangerardin/claude-forge.git
 cp -r claude-forge/.claude your-project/
 ```
 
@@ -30,7 +30,7 @@ cp -r claude-forge/.claude your-project/
 ```bash
 # 1. Installer dans votre projet
 cd your-project
-curl -fsSL https://raw.githubusercontent.com/ewan/claude-forge/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/ewangerardin/claude-forge/main/install.sh | bash
 
 # 2. Lancer Claude Code
 claude

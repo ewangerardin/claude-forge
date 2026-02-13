@@ -4,7 +4,7 @@
   "description": "Meta-framework d'orchestration multi-agents pour Claude Code",
   "author": "Ewan",
   "license": "MIT",
-  "repository": "https://github.com/ewan/claude-forge",
+  "repository": "https://github.com/ewangerardin/claude-forge",
   "keywords": ["claude-code", "agents", "orchestration", "hooks", "memory"],
   "claude_code_version": ">=1.0.0",
   "agents": [
