@@ -1,0 +1,128 @@
+{
+  "name": "claude-forge",
+  "version": "1.0.0",
+  "description": "Meta-framework d'orchestration multi-agents pour Claude Code",
+  "author": "Ewan",
+  "license": "MIT",
+  "repository": "https://github.com/ewan/claude-forge",
+  "keywords": ["claude-code", "agents", "orchestration", "hooks", "memory"],
+  "claude_code_version": ">=1.0.0",
+  "agents": [
+    {
+      "name": "orchestrator",
+      "file": "agents/orchestrator.md",
+      "description": "Central coordinator that routes tasks to specialists"
+    },
+    {
+      "name": "coder",
+      "file": "agents/coder.md",
+      "description": "Fast implementation specialist"
+    },
+    {
+      "name": "reviewer",
+      "file": "agents/reviewer.md",
+      "description": "Code quality and security specialist"
+    },
+    {
+      "name": "architect",
+      "file": "agents/architect.md",
+      "description": "Design and structure specialist"
+    },
+    {
+      "name": "tester",
+      "file": "agents/tester.md",
+      "description": "Testing and coverage specialist"
+    },
+    {
+      "name": "doc-writer",
+      "file": "agents/doc-writer.md",
+      "description": "Documentation specialist"
+    },
+    {
+      "name": "agent-creator",
+      "file": "agents/agent-creator.md",
+      "description": "Creates new agents with Hook Advisor consultation"
+    },
+    {
+      "name": "hook-advisor",
+      "file": "agents/hook-advisor.md",
+      "description": "Expert on hook recommendations"
+    },
+    {
+      "name": "context-manager",
+      "file": "agents/context-manager.md",
+      "description": "Manages persistent memory"
+    }
+  ],
+  "skills": [
+    {
+      "name": "forge:init",
+      "file": "skills/forge-init/SKILL.md",
+      "description": "Initialize Forge for current project"
+    },
+    {
+      "name": "forge:status",
+      "file": "skills/forge-status/SKILL.md",
+      "description": "Display Forge dashboard"
+    },
+    {
+      "name": "forge:review",
+      "file": "skills/forge-review/SKILL.md",
+      "description": "Multi-agent code review"
+    },
+    {
+      "name": "forge:parallel",
+      "file": "skills/forge-parallel/SKILL.md",
+      "description": "Parallel task execution"
+    },
+    {
+      "name": "forge:memory",
+      "file": "skills/forge-memory/SKILL.md",
+      "description": "Memory management"
+    }
+  ],
+  "hooks": {
+    "SessionStart": [
+      {
+        "command": "bash .claude/hooks/session-start-restore.sh",
+        "description": "Restore persistent memory"
+      }
+    ],
+    "PreCompact": [
+      {
+        "command": "bash .claude/hooks/pre-compact-save-context.sh",
+        "description": "Save context before compaction"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "command": "bash .claude/hooks/post-write-validate.sh",
+        "description": "Validate written files"
+      },
+      {
+        "matcher": "Write(*.ts)|Write(*.js)|Write(*.py)|Write(*.go)",
+        "command": "bash .claude/hooks/post-write-suggest-tests.sh",
+        "description": "Suggest tests for code files"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "command": "bash .claude/hooks/pre-tool-security-scan.sh",
+        "description": "Security scan for bash commands"
+      }
+    ]
+  },
+  "templates": [
+    "templates/agent-template.md",
+    "templates/hook-template.sh",
+    "templates/skill-template.md"
+  ],
+  "install": {
+    "post_install": [
+      "mkdir -p .claude/memory",
+      "bash .claude/hooks/session-start-restore.sh"
+    ]
+  }
+}

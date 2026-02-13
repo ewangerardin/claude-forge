@@ -1,0 +1,73 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(*)",
+      "Grep(*)",
+      "Glob(*)",
+      "Write(.claude/**)",
+      "Edit(.claude/**)",
+      "Bash(npm test*)",
+      "Bash(npx prettier*)",
+      "Bash(npx eslint*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git status*)",
+      "Bash(git branch*)",
+      "Bash(cat .claude/memory/*)",
+      "Bash(ls *)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/session-start-restore.sh"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/pre-compact-save-context.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/post-write-validate.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Write(*.ts)|Write(*.js)|Write(*.py)|Write(*.go)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/post-write-suggest-tests.sh"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/pre-tool-security-scan.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
