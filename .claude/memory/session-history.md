@@ -13,3 +13,4 @@
 | 2026-02-13 20:35:42 | #6 | PreCompact | Context saved before compaction |
 | 2026-02-13 20:35:54 | #7 | SessionStart | Restored from session #6 |
 | 2026-02-13 20:35:54 | #7 | PreCompact | Context saved before compaction |
+| 2026-02-14 18:33:45 | #8 | SessionStart | Restored from session #7 |

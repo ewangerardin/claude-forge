@@ -33,7 +33,15 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash .claude/hooks/pre-compact-save-context.sh"
+            "command": "bash .claude/hooks/pre-compact-prepare.sh"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "COMPACTION IMMINENTE — Le contexte va etre resume et les details perdus.\n\nAvant la compaction, sauvegarde les informations durables :\n\n1. **Etat du travail** -> `.claude/memory/daily/{DATE}.md` (append, format: `## Session [heure] — [resume]`)\n2. **Decisions prises** -> `.claude/memory/decisions.md` (append)\n3. **Erreurs et solutions** -> `.claude/memory/errors.md` (append)\n4. **Faits durables** -> `.claude/memory/MEMORY.md` (si changement)\n5. **Patterns detectes** -> `.claude/memory/patterns.md` (append)\n\nRegles : MEMORY.md < 200 lignes. Daily logs = append-only. Ne sauvegarde que l'utile. Cree le dossier `.claude/memory/daily/` s'il n'existe pas."
           }
         ]
       }
@@ -65,6 +73,16 @@
           {
             "type": "command",
             "command": "bash .claude/hooks/pre-tool-security-scan.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/stop-session-finalize.sh"
           }
         ]
       }
