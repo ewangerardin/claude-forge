@@ -1,6 +1,6 @@
 #!/bin/bash
-# Hook: PreCompact (command) — Prepares environment for cognitive memory flush
-# Runs BEFORE the prompt-based flush so Claude has stats available
+# Hook: PreCompact (command) — Stats + cognitive flush message
+# Outputs stats AND the flush prompt so Claude saves memory before compaction
 
 MEMORY_DIR=".claude/memory"
 DAILY_DIR="$MEMORY_DIR/daily"
@@ -27,3 +27,15 @@ echo "Errors : $(count_lines "$MEMORY_DIR/errors.md") lignes"
 echo "Patterns : $(count_lines "$MEMORY_DIR/patterns.md") lignes"
 echo "Open tasks : $(grep -c '^\- \[ \]' "$MEMORY_DIR/MEMORY.md" 2>/dev/null || echo '0')"
 echo "========================="
+echo ""
+echo "COMPACTION IMMINENTE — Le contexte va etre resume et les details perdus."
+echo ""
+echo "Avant la compaction, sauvegarde les informations durables :"
+echo ""
+echo "1. **Etat du travail** -> .claude/memory/daily/$TODAY.md (append, format: ## Session [heure] — [resume])"
+echo "2. **Decisions prises** -> .claude/memory/decisions.md (append)"
+echo "3. **Erreurs et solutions** -> .claude/memory/errors.md (append)"
+echo "4. **Faits durables** -> .claude/memory/MEMORY.md (si changement)"
+echo "5. **Patterns detectes** -> .claude/memory/patterns.md (append)"
+echo ""
+echo "Regles : MEMORY.md < 200 lignes. Daily logs = append-only. Ne sauvegarde que l'utile."
